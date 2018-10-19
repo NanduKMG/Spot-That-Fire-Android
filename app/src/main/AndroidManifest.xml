@@ -16,7 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RehabActivity"></activity>
+        <activity android:name=".RehabActivity" />
+        <activity android:name=".ReportActivity"></activity>
     </application>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
 </manifest>
