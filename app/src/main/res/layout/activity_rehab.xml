@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RehabActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="323dp"
+        android:layout_height="90dp"
+        android:text="Rehab name "
+        android:textSize="36sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <LinearLayout
+        android:layout_width="383dp"
+        android:layout_height="62dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="120dp">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="136dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Phone" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Get Directions" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="254dp"
+        android:layout_height="109dp"
+        android:text="Contribute"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="242dp" />
+</android.support.constraint.ConstraintLayout>
