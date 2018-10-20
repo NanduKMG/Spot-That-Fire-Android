@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -57,10 +58,12 @@ public class FireReportActivity extends AppCompatActivity {
     TextView file;
     EditText description;
 
-    int PLACE_PICKER_REQUEST = 1;
-    int RQS_RECORDING = 2;
-    int ACTION_TAKE_VIDEO = 3;
-    int TAKE_PIC = 4;
+    Intent changeIntent;
+
+    private  static final int PLACE_PICKER_REQUEST = 1;
+    private  static final int RQS_RECORDING = 2;
+    private  static final int ACTION_TAKE_VIDEO = 3;
+    private  static final int TAKE_PIC = 100;
 
     Button audio, video, photo, chooseLoc, report;
     CheckBox otherBox;
@@ -129,8 +132,7 @@ public class FireReportActivity extends AppCompatActivity {
         photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =
-                        new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent, TAKE_PIC);
             }
         });
@@ -257,7 +259,10 @@ public class FireReportActivity extends AppCompatActivity {
                 {
                     progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(getApplicationContext(),"SUCCESSFULLY REPORTED",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(FireReportActivity.this,ReportActivity.class));
+                    changeIntent = new Intent(FireReportActivity.this,ReportActivity.class);
+                    changeIntent.putExtra("lat",String.valueOf(latLng.latitude));
+                    changeIntent.putExtra("long",String.valueOf(latLng.longitude));
+                    startActivity(changeIntent);
                 }
             }
 

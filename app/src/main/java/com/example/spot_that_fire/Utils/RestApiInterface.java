@@ -2,6 +2,9 @@ package com.example.spot_that_fire.Utils;
 
 import com.example.spot_that_fire.Models.ApiResponse;
 import com.example.spot_that_fire.Models.LocData;
+import com.example.spot_that_fire.Models.Rehab_min;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -31,4 +34,8 @@ public interface RestApiInterface {
     @FormUrlEncoded
     @POST("/apis/fireLoc/getLocDetails")
     Call<LocData> getLocData(@Field("lat") String lat, @Field("long") String lng);
+
+    @FormUrlEncoded
+    @POST("/apis/rehab/getDistrict")
+    Call<List<Rehab_min>> getNearbyRehabs(@Field("lat") String lat, @Field("long") String lng);
 }
