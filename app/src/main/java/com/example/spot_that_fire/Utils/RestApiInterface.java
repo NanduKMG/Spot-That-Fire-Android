@@ -18,4 +18,11 @@ public interface RestApiInterface {
     @POST("/auth/verifyOTP")
     Call<ApiResponse> verifyOTP(@Field("mobileNo") String mobile, @Field("otp") String otp);
 
+    @FormUrlEncoded
+    @POST("/apis/user/signup")
+    Call<ApiResponse> signUp(@Field("lat") String lat, @Field("long") String lng, @Field("name") String name, @Field("phone") String phone);
+
+    @FormUrlEncoded
+    @POST("/apis/fire/reportFire")
+    Call<ApiResponse> fireReport();
 }

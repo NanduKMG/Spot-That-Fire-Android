@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.firebase.FirebaseApp;
+
 public class MainActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //hide the title bar
         //set content view AFTER ABOVE sequence (to avoid crash)
         setContentView(R.layout.activity_main);
+
+        FirebaseApp.initializeApp(this);
 
         sharedPreferences = getSharedPreferences("userData",MODE_PRIVATE);
 

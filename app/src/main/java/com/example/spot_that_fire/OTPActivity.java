@@ -1,5 +1,6 @@
 package com.example.spot_that_fire;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -54,6 +55,7 @@ public class OTPActivity extends AppCompatActivity {
                         if(response.isSuccessful())
                         {
                             ApiResponse apiResponse = response.body();
+                            uploadPersonData();
                             Toast.makeText(getApplicationContext(),"SUCCESSFULLY CREATED ACCOUND",Toast.LENGTH_LONG).show();
                             startActivity(new Intent(OTPActivity.this,MainActivity.class));
                         }
@@ -70,5 +72,40 @@ public class OTPActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public void uploadPersonData()
+    {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.show();
+
+        String name = sharedPreferences.getString("name",null);
+        String phone = sharedPreferences.getString("phone",null);
+        String lat = sharedPreferences.getString("lat",null);
+        String lng = sharedPreferences.getString("lng",null);
+
+        RestApiInterface service = ApiService.getClient();
+        Call<ApiResponse> call = service.signUp(lat,lng,name,phone);
+
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if(response.isSuccessful())
+                {
+                    Toast.makeText(getApplicationContext(), "Registration Complete",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Response Failure",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Server Error",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        progressDialog.dismiss();
     }
 }
