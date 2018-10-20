@@ -1,6 +1,7 @@
 package com.example.spot_that_fire.Utils;
 
 import com.example.spot_that_fire.Models.ApiResponse;
+import com.example.spot_that_fire.Models.LocData;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -23,6 +24,10 @@ public interface RestApiInterface {
     Call<ApiResponse> signUp(@Field("lat") String lat, @Field("long") String lng, @Field("name") String name, @Field("phone") String phone);
 
     @FormUrlEncoded
-    @POST("/apis/fire/reportFire")
+    @POST("/apis/fireLoc/reportFire")
     Call<ApiResponse> fireReport();
+
+    @FormUrlEncoded
+    @POST("/apis/fireLoc/getLocDetails")
+    Call<LocData> getLocData(@Field("lat") String lat, @Field("long") String lng);
 }
