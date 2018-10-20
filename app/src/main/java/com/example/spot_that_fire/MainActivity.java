@@ -1,6 +1,7 @@
 package com.example.spot_that_fire;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -17,12 +20,16 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide(); //hide the title bar
         //set content view AFTER ABOVE sequence (to avoid crash)
         setContentView(R.layout.activity_main);
+
+        sharedPreferences = getSharedPreferences("userData",MODE_PRIVATE);
+
+        if(!sharedPreferences.contains("name"))
+            startActivity(new Intent(MainActivity.this,SignUpActivity.class));
     }
 
     public void onReport(View v)
     {
-     //Report clicked, Trigger Report Activity
-        Intent newActivity = new Intent(this,RehabActivity.class);
+        Intent newActivity = new Intent(this,FireReportActivity.class);
         startActivity(newActivity);
     }
 }
