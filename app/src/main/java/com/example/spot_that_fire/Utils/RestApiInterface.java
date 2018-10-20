@@ -4,6 +4,7 @@ import com.example.spot_that_fire.Models.ApiResponse;
 import com.example.spot_that_fire.Models.LocData;
 import com.example.spot_that_fire.Models.Rehab_Detail;
 import com.example.spot_that_fire.Models.Rehab_min;
+import com.example.spot_that_fire.Models.WeatherInfo;
 
 import java.util.List;
 
@@ -12,6 +13,9 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface RestApiInterface {
 
@@ -43,4 +47,7 @@ public interface RestApiInterface {
     @FormUrlEncoded
     @POST("/apis/rehab/getSpecific")
     Call<Rehab_Detail> getSpecificRehab(@Field("lat") String lat, @Field("long") String lng, @Field("rehabID") String rehabID);
+
+    @GET
+    Call<WeatherInfo> getAirQuality(@Url String url);
 }
