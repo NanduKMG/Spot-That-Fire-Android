@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,6 +49,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.view.View.GONE;
+
 public class FireReportActivity extends AppCompatActivity {
 
     PlacePicker placePicker;
@@ -60,6 +63,7 @@ public class FireReportActivity extends AppCompatActivity {
     int TAKE_PIC = 4;
 
     Button audio, video, photo, chooseLoc, report;
+    CheckBox otherBox;
 
     LatLng latLng;
 
@@ -70,6 +74,8 @@ public class FireReportActivity extends AppCompatActivity {
     Uri fileUri;
 
     SharedPreferences sharedPreferences;
+
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +93,8 @@ public class FireReportActivity extends AppCompatActivity {
         report = (Button)findViewById(R.id.report);
         file = (TextView)findViewById(R.id.filePath);
         description = (EditText)findViewById(R.id.description);
+        progressBar = (ProgressBar)findViewById(R.id.progressbar);
+        otherBox = (CheckBox) findViewById(R.id.checkbox);
 
         sharedPreferences = getSharedPreferences("userData",MODE_PRIVATE);
 
@@ -130,6 +138,8 @@ public class FireReportActivity extends AppCompatActivity {
         report.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setIndeterminate(true);
                 reportFire();
             }
         });
@@ -172,6 +182,8 @@ public class FireReportActivity extends AppCompatActivity {
 
     void reportFire()
     {
+        storageRef = storage.getReference();
+
         if(locData != null)
         {
             if(locData.country != null)
@@ -235,13 +247,15 @@ public class FireReportActivity extends AppCompatActivity {
 
     void completeUpload(String download)
     {
+        int other = (otherBox.isChecked())?1:0;
         RestApiInterface service = ApiService.getClient();
-        Call<ApiResponse> call = service.fireReport(String.valueOf(latLng.latitude), String.valueOf(latLng.longitude), description.getText().toString(), sharedPreferences.getString("phone",null), download);
+        Call<ApiResponse> call = service.fireReport(String.valueOf(latLng.latitude), String.valueOf(latLng.longitude), description.getText().toString(), sharedPreferences.getString("phone",null), download, other);
         call.enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if(response.isSuccessful())
                 {
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(getApplicationContext(),"SUCCESSFULLY REPORTED",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(FireReportActivity.this,ReportActivity.class));
                 }
@@ -249,7 +263,7 @@ public class FireReportActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"Server Error ",Toast.LENGTH_LONG).show();
             }
         });
     }
