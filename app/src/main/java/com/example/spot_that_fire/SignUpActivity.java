@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -60,6 +61,10 @@ public class SignUpActivity extends AppCompatActivity {
                 if(userPhone.isEmpty())
                     return;
 
+
+                Log.d("UserName",userName);
+                Log.d("UserPhone",userPhone);
+
                 editor.putString("name",userName);
                 editor.putString("phone",userPhone);
 
@@ -70,11 +75,16 @@ public class SignUpActivity extends AppCompatActivity {
                     RestApiInterface service = ApiService.getClient();
                     Call<ApiResponse> call = service.callOTP(userPhone);
 
+                    Log.d("OTP","CALLING");
+
                     call.enqueue(new Callback<ApiResponse>() {
                         @Override
                         public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                            if(response.body().success)
+                            if(response.isSuccessful())
                             {
+                                ApiResponse apiResponse = response.body();
+                                Log.d("RESPONDE",apiResponse.toString());
+
                                 startActivity(new Intent(SignUpActivity.this,OTPActivity.class));
                             }
                             else
