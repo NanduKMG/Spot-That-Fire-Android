@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.Locale;
+
 public class RehabActivity extends AppCompatActivity {
 
     @Override
@@ -26,7 +28,12 @@ public class RehabActivity extends AppCompatActivity {
     }
     public void onGetDirections(View v)
     {
-        //Report clicked, Trigger Report Activity
+        //get lat, long of this rehab from backend
+        Double latitude = 8.531, longitude = 76.9139;
+
+        String uri = String.format(Locale.ENGLISH, "google.navigation:q=%f,%f", latitude, longitude);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        startActivity(intent);
 
     }
 }
