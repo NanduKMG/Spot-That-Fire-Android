@@ -21,7 +21,8 @@
         <activity android:name=".RehabActivity" />
         <activity android:name=".ReportActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".FireReportActivity"></activity>
+        <activity android:name=".FireReportActivity" />
+        <activity android:name=".OTPActivity"></activity>
     </application>
 
 </manifest>
