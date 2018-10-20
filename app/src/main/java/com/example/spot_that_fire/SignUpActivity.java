@@ -3,7 +3,7 @@ package com.example.spot_that_fire;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class SigninActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

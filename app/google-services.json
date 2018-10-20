@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1074092663397",
+    "firebase_url": "https://spot-that-fire-nsac.firebaseio.com",
+    "project_id": "spot-that-fire-nsac",
+    "storage_bucket": "spot-that-fire-nsac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1074092663397:android:0e66ce0ba5d415a5",
+        "android_client_info": {
+          "package_name": "com.example.spot_that_fire"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1074092663397-h6sco4oas3vam30jun9ssumfrv7a6k5k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.spot_that_fire",
+            "certificate_hash": "fa7a964839e8bd1e448fa1bcb16146013bc45ac4"
+          }
+        },
+        {
+          "client_id": "1074092663397-s13u8v4kisne8dsof9dc0pbjj9jb6vvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcg9Y7ImD57pot00O0nn7UZaQ7PhgNB7Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1074092663397-s13u8v4kisne8dsof9dc0pbjj9jb6vvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

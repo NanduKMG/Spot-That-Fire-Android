@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".RehabActivity" />
         <activity android:name=".ReportActivity" />
-        <activity android:name=".SigninActivity"></activity>
+        <activity android:name=".SignUpActivity"></activity>
     </application>
 
 </manifest>

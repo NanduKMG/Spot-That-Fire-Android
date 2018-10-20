@@ -10,13 +10,15 @@ import android.view.WindowManager;
 public class MainActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);//will hide the title
         getSupportActionBar().hide(); //hide the title bar
-//set content view AFTER ABOVE sequence (to avoid crash)
+        //set content view AFTER ABOVE sequence (to avoid crash)
         setContentView(R.layout.activity_main);
     }
+
     public void onReport(View v)
     {
      //Report clicked, Trigger Report Activity
