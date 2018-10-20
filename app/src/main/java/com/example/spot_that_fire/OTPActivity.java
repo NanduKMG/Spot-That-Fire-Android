@@ -3,6 +3,7 @@ package com.example.spot_that_fire;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,9 @@ import android.widget.Toast;
 import com.example.spot_that_fire.Models.ApiResponse;
 import com.example.spot_that_fire.Utils.ApiService;
 import com.example.spot_that_fire.Utils.RestApiInterface;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -93,6 +97,7 @@ public class OTPActivity extends AppCompatActivity {
                 if(response.isSuccessful())
                 {
                     Toast.makeText(getApplicationContext(), "Registration Complete",Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {

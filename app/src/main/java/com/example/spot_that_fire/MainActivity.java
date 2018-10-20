@@ -22,6 +22,7 @@ import com.example.spot_that_fire.Models.WeatherInfo;
 import com.example.spot_that_fire.Utils.ApiService;
 import com.example.spot_that_fire.Utils.RestApiInterface;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         setContentView(R.layout.activity_main);
 
         FirebaseApp.initializeApp(this);
+        FirebaseMessaging.getInstance().subscribeToTopic("2");
 
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
