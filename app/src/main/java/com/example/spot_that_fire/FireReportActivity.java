@@ -32,6 +32,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -68,8 +70,6 @@ public class FireReportActivity extends AppCompatActivity {
     Uri fileUri;
 
     SharedPreferences sharedPreferences;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -223,7 +223,7 @@ public class FireReportActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
-                        Toast.makeText(getApplicationContext(),downloadUri.toString(),Toast.LENGTH_LONG).show();
+                        completeUpload(downloadUri.toString());
                     } else {
                         Toast.makeText(getApplicationContext(),"FAILED DOWNLOAD LINK GEN",Toast.LENGTH_LONG).show();
                         // ...
@@ -231,7 +231,27 @@ public class FireReportActivity extends AppCompatActivity {
                 }
             });
         }
+    }
 
+    void completeUpload(String download)
+    {
+        RestApiInterface service = ApiService.getClient();
+        Call<ApiResponse> call = service.fireReport(String.valueOf(latLng.latitude), String.valueOf(latLng.longitude), description.getText().toString(), sharedPreferences.getString("phone",null), download);
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if(response.isSuccessful())
+                {
+                    Toast.makeText(getApplicationContext(),"SUCCESSFULLY REPORTED",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(FireReportActivity.this,ReportActivity.class));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"Server Error",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     void getLocation(LatLng latLng)

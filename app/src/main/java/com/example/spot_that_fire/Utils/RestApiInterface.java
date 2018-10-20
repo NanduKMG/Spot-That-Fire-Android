@@ -25,7 +25,8 @@ public interface RestApiInterface {
 
     @FormUrlEncoded
     @POST("/apis/fireLoc/reportFire")
-    Call<ApiResponse> fireReport();
+    Call<ApiResponse> fireReport(@Field("lat") String lat, @Field("long") String lng, @Field("desc") String desc, @Field("phone") String phone,
+                                 @Field("path") String path);
 
     @FormUrlEncoded
     @POST("/apis/fireLoc/getLocDetails")
