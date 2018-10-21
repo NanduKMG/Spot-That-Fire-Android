@@ -1,6 +1,10 @@
 # Spot-That-Fire-Android
 Spot-That-Fire App
 
+
+## Snapshots
+![App](preview.jpg)
+
 Built in Android.
 <h3> Existing Features </h3>
 <ul>
