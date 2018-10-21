@@ -13,8 +13,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.spot_that_fire.Models.ApiResponse;
+import com.example.spot_that_fire.Models.LocData;
 import com.example.spot_that_fire.Utils.ApiService;
 import com.example.spot_that_fire.Utils.RestApiInterface;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -30,6 +32,8 @@ public class OTPActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+
+    LocData locData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +82,34 @@ public class OTPActivity extends AppCompatActivity {
         });
     }
 
+    void getLocation(LatLng latLng)
+    {
+        RestApiInterface service = ApiService.getClient();
+        Call<LocData> call = service.getLocData(String.valueOf(latLng.latitude), String.valueOf(latLng.longitude));
+
+        Log.d("LOCDATA","CALLING");
+
+        call.enqueue(new Callback<LocData>() {
+            @Override
+            public void onResponse(Call<LocData> call, Response<LocData> response) {
+                if(response.isSuccessful())
+                {
+                    locData = response.body();
+                    editor.putString("country",locData.country);
+                    editor.putString("state",locData.state);
+                    editor.putString("district",locData.district);
+                    editor.commit();
+                    Log.d("LOCDATA Updated",locData.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LocData> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"SERVER ERR",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     public void uploadPersonData()
     {
         ProgressDialog progressDialog = new ProgressDialog(this);
@@ -87,6 +119,9 @@ public class OTPActivity extends AppCompatActivity {
         String phone = sharedPreferences.getString("phone",null);
         String lat = sharedPreferences.getString("lat",null);
         String lng = sharedPreferences.getString("lng",null);
+
+        LatLng latLng = new LatLng(Double.parseDouble(lat),Double.parseDouble(lng));
+        getLocation(latLng);
 
         RestApiInterface service = ApiService.getClient();
         Call<ApiResponse> call = service.signUp(lat,lng,name,phone);

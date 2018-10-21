@@ -1,6 +1,7 @@
 package com.example.spot_that_fire.Utils;
 
 import com.example.spot_that_fire.Models.ApiResponse;
+import com.example.spot_that_fire.Models.EonetFire;
 import com.example.spot_that_fire.Models.LocData;
 import com.example.spot_that_fire.Models.Rehab_Detail;
 import com.example.spot_that_fire.Models.Rehab_min;
@@ -50,4 +51,7 @@ public interface RestApiInterface {
 
     @GET
     Call<WeatherInfo> getAirQuality(@Url String url);
+
+    @GET("https://eonet.sci.gsfc.nasa.gov/api/v2.1/categories/8?status=open")
+    Call<EonetFire> eonetFire();
 }

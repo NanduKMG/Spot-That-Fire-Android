@@ -34,7 +34,7 @@ public class ReportActivity extends AppCompatActivity {
                 String lat = intent.getStringExtra("lat");
                 String lng = intent.getStringExtra("long");
 
-                Intent changeIntent = new Intent(ReportActivity.this, RehabActivity.class);
+                Intent changeIntent = new Intent(ReportActivity.this, RehabMap.class);
                 changeIntent.putExtra("lat",lat);
                 changeIntent.putExtra("long",lng);
                 startActivity(changeIntent);

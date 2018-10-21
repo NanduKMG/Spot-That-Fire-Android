@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     private LocationManager locationManager;
     TextView textView;
 
+    Button fireMap;
+
     @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,8 +49,15 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         setContentView(R.layout.activity_main);
 
         FirebaseApp.initializeApp(this);
-        FirebaseMessaging.getInstance().subscribeToTopic("2");
 
+        fireMap = (Button)findViewById(R.id.firemap);
+
+        fireMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,FireMap.class));
+            }
+        });
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         textView = (TextView)findViewById(R.id.airqual);
@@ -90,6 +100,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
         if(!sharedPreferences.contains("name"))
             startActivity(new Intent(MainActivity.this,SignUpActivity.class));
+
+        String topic = sharedPreferences.getString("district",null);
+        if(topic != null)
+        {
+            Log.d("SUBSCRIBIED",topic);
+            FirebaseMessaging.getInstance().subscribeToTopic(topic);
+
+        }
 
 
     }
