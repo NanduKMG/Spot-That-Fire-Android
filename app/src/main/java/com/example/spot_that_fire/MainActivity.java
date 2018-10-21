@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
     private LocationManager locationManager;
     TextView textView;
 
+    ProgressBar progressBar;
+
     Button fireMap;
 
     @SuppressLint("MissingPermission")
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         FirebaseApp.initializeApp(this);
 
         fireMap = (Button)findViewById(R.id.firemap);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
 
         fireMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +62,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                 startActivity(new Intent(MainActivity.this,FireMap.class));
             }
         });
+
+        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setIndeterminate(true);
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         textView = (TextView)findViewById(R.id.airqual);
@@ -71,7 +78,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                 Log.d("Location Changed 1","Loc ");
                 lat = String.valueOf(location.getLatitude());
                 lng = String.valueOf(location.getLongitude());
+
+                progressBar.setVisibility(View.VISIBLE);
+                progressBar.setIndeterminate(true);
+
                 weatherData();
+
+                progressBar.setVisibility(View.INVISIBLE);
             }
 
             @Override
@@ -127,16 +140,18 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
                 {
                     WeatherInfo weatherInfo = response.body();
                     String S = "";
-                    S += "Breezometer : " + weatherInfo.breezometer_description;
-                    S += " Children : " + weatherInfo.random_recommendations.children;
-                    S += " Health : " + weatherInfo.random_recommendations.health;
-                    S += " Sport : " + weatherInfo.random_recommendations.sport;
-                    S += " Inside : " + weatherInfo.random_recommendations.inside;
-                    S += " Outside : " + weatherInfo.random_recommendations.outside;
-                    S += " Dominant Pollution Description : " + weatherInfo.dominant_pollutant_description;
+                    S += " | Breezometer : " + weatherInfo.breezometer_description;
+                    S += " | Children : " + weatherInfo.random_recommendations.children;
+                    S += " | Health : " + weatherInfo.random_recommendations.health;
+                    S += " | Sport : " + weatherInfo.random_recommendations.sport;
+                    S += " | Inside : " + weatherInfo.random_recommendations.inside;
+                    S += " | Outside : " + weatherInfo.random_recommendations.outside;
+                    S += " | Dominant Pollution Description : " + weatherInfo.dominant_pollutant_description;
 
                     Log.d("WeatherData",S);
                     textView.setText(S);
+                    progressBar.setVisibility(View.INVISIBLE);
+
                 }
                 else
                 {
