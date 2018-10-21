@@ -60,6 +60,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            sendNotification(remoteMessage.getNotification().getBody());
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -75,7 +76,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
      * is initially generated so this is where you would retrieve the token.
      */
     @Override
-    public void onNewToken(String token) {
+    public void onNewToken(String token)
+    {
         Log.d(TAG, "Refreshed token: " + token);
 
         // If you want to send messages to this application instance or
@@ -134,7 +136,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
                         .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
-                        .setContentTitle("FCM Message")
+                        .setContentTitle("WildFire Alert")
                         .setContentText(messageBody)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
