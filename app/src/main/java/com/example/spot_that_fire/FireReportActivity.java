@@ -293,6 +293,7 @@ public class FireReportActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LocData> call, Throwable t) {
                 Toast.makeText(getApplicationContext(),"SERVER ERR",Toast.LENGTH_LONG).show();
+                Log.d("ERROR",t.toString());
             }
         });
     }
