@@ -10,8 +10,10 @@
     <Button
         android:id="@+id/reportBtn"
         android:layout_width="197dp"
-        android:layout_height="89dp"
+        android:layout_height="94dp"
+        android:paddingTop="10dp"
         android:background="@android:color/holo_red_dark"
+        android:drawableTop="@drawable/icon_fire"
         android:onClick="onReport"
         android:text="Report Fire"
         android:textColor="@android:color/white"
@@ -51,7 +53,9 @@
                 android:layout_width="312dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="20dp"
+                android:drawableLeft="@drawable/icon_air"
                 android:layout_marginRight="20dp"
+                android:paddingLeft="10dp"
                 android:text="Air Quality Info"
                 android:textAlignment="center"
                 android:textAllCaps="false"
@@ -103,11 +107,12 @@
 
     <Button
         android:id="@+id/firemap"
-        android:layout_width="wrap_content"
+        android:layout_width="153dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:drawableLeft="@drawable/icon_map"
         android:text="Fire Map"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

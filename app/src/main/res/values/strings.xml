@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Spot-That-Fire</string>
+    <string name="app_name">FireWatcher</string>
     <string name="api_key">AIzaSyBCpJuJ-3GGnlkSVi3pkVNnes47bpoA-Zc</string>
     <string name="title_activity_rehab_map">Map</string>
     <string name="title_activity_fire_map">Map</string>

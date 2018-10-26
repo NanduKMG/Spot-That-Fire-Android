@@ -68,6 +68,8 @@ public class RehabActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Rehab_Detail> call, Throwable t) {
+                Log.d("HELIEF CENTRE",t.toString());
+
                 Toast.makeText(getApplicationContext(),"ERROR IN Server",Toast.LENGTH_LONG).show();
             }
         });
