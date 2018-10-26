@@ -30,7 +30,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="368dp"
-        android:layout_height="52dp"
+        android:layout_height="82dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -49,12 +49,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:drawableTop="@drawable/icon_audio"
             android:text="Audio" />
 
         <Button
             android:id="@+id/video"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableTop="@drawable/icon_video"
             android:layout_weight="1"
             android:text="Video" />
 
@@ -62,6 +64,7 @@
             android:id="@+id/picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:drawableTop="@drawable/icon_camera"
             android:layout_weight="1"
             android:text="Picture" />
     </LinearLayout>
@@ -78,6 +81,7 @@
         android:layout_marginBottom="8dp"
         android:text="Attaching File :"
         android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/checkbox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,8 +94,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
+        android:drawableLeft="@drawable/icon_location"
+        android:background="@color/colorAccent"
         android:text="Choose Location"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -146,7 +153,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="7dp"
         android:text="Description"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/description"
         app:layout_constraintEnd_toEndOf="parent"
@@ -165,6 +172,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="I'm helping a friend"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
